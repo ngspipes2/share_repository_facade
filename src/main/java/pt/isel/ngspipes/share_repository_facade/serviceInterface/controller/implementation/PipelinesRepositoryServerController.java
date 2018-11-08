@@ -1,5 +1,6 @@
 package pt.isel.ngspipes.share_repository_facade.serviceInterface.controller.implementation;
 
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +25,12 @@ public class PipelinesRepositoryServerController implements IPipelinesRepository
         if(repository == null)
             throw new UnknownRepositoryTypeException("Unknown type of repository!" + data.repositoryLocation);
 
-        return new ResponseEntity<>(repository.getLogo(), HttpStatus.OK);
+        byte[] logo = repository.getLogo();
+
+        if(logo != null && !Base64.isBase64(logo))
+            logo = Base64.encodeBase64(logo);
+
+        return new ResponseEntity<>(logo, HttpStatus.OK);
     }
 
     @Override
