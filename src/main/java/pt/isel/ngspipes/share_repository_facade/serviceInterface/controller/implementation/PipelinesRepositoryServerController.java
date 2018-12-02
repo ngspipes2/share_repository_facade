@@ -3,6 +3,7 @@ package pt.isel.ngspipes.share_repository_facade.serviceInterface.controller.imp
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import pt.isel.ngspipes.share_repository_facade.serviceInterface.controller.faca
 import java.util.Collection;
 
 @RestController
+@CrossOrigin
 public class PipelinesRepositoryServerController implements IPipelinesRepositoryServerController {
 
     @Override
