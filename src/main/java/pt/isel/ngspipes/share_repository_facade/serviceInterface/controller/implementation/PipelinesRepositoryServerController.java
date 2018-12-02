@@ -42,7 +42,12 @@ public class PipelinesRepositoryServerController implements IPipelinesRepository
         if(repository == null)
             throw new UnknownRepositoryTypeException("Unknown type of repository!" + data.repositoryLocation);
 
-        repository.setLogo(data.data);
+        byte[] logo = data.data;
+
+        if(logo != null && !Base64.isBase64(logo))
+            logo = Base64.encodeBase64(logo);
+
+        repository.setLogo(logo);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
