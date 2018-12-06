@@ -53,13 +53,27 @@ public class ToolsRepositoryServerController implements IToolsRepositoryServerCo
     }
 
     @Override
+    public ResponseEntity<Collection<String>> getToolsNames(@RequestBody DataWrapper<Void> data) throws Exception {
+        IToolsRepository repository = ToolsRepositoryFactory.create(data.repositoryLocation, data.repositoryConfig);
+
+        if(repository == null)
+            throw new UnknownRepositoryTypeException("Unknown type of repository!" + data.repositoryLocation);
+
+        Collection<String> names = repository.getToolsNames();
+
+        return new ResponseEntity<>(names, HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<Collection<IToolDescriptor>> getAllTools(@RequestBody DataWrapper<Void> data) throws Exception {
         IToolsRepository repository = ToolsRepositoryFactory.create(data.repositoryLocation, data.repositoryConfig);
 
         if(repository == null)
             throw new UnknownRepositoryTypeException("Unknown type of repository!" + data.repositoryLocation);
 
-        return new ResponseEntity<>(repository.getAll(), HttpStatus.OK);
+        Collection<IToolDescriptor> tools = repository.getAll();
+
+        return new ResponseEntity<>(tools, HttpStatus.OK);
     }
 
     @Override

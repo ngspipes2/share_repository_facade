@@ -18,6 +18,9 @@ public interface IPipelinesRepositoryServerController {
     @RequestMapping(value = Routes.PIPELINES_FACADE_SET_LOGO_URI, method = RequestMethod.POST)
     ResponseEntity<Void> setLogo(@RequestBody DataWrapper<byte[]> data) throws Exception;
 
+    @RequestMapping(value = Routes.PIPELINES_FACADE_GET_PIPELINES_NAMES_URI, method = RequestMethod.POST)
+    ResponseEntity<Collection<String>> getPipelinesNames(@RequestBody DataWrapper<Void> data) throws Exception;
+
     @RequestMapping(value = Routes.PIPELINES_FACADE_GET_ALL_PIPELINES_URI, method = RequestMethod.POST)
     ResponseEntity<Collection<IPipelineDescriptor>> getAllPipelines(@RequestBody DataWrapper<Void> data) throws Exception;
 

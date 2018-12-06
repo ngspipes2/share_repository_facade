@@ -18,6 +18,9 @@ public interface IToolsRepositoryServerController {
     @RequestMapping(value = Routes.TOOLS_FACADE_SET_LOGO_URI, method = RequestMethod.POST)
     ResponseEntity<Void> setLogo(@RequestBody DataWrapper<byte[]> data) throws Exception;
 
+    @RequestMapping(value = Routes.TOOLS_FACADE_GET_TOOLS_NAMES_URI, method = RequestMethod.POST)
+    ResponseEntity<Collection<String>> getToolsNames(@RequestBody DataWrapper<Void> data) throws Exception;
+
     @RequestMapping(value = Routes.TOOLS_FACADE_GET_ALL_TOOLS_URI, method = RequestMethod.POST)
     ResponseEntity<Collection<IToolDescriptor>> getAllTools(@RequestBody DataWrapper<Void> data) throws Exception;
 

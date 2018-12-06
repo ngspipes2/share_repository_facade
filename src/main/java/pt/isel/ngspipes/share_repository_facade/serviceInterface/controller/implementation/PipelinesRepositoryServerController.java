@@ -53,6 +53,18 @@ public class PipelinesRepositoryServerController implements IPipelinesRepository
     }
 
     @Override
+    public ResponseEntity<Collection<String>> getPipelinesNames(@RequestBody DataWrapper<Void> data) throws Exception {
+        IPipelinesRepository repository = PipelinesRepositoryFactory.create(data.repositoryLocation, data.repositoryConfig);
+
+        if(repository == null)
+            throw new UnknownRepositoryTypeException("Unknown type of repository!" + data.repositoryLocation);
+
+        Collection<String> names = repository.getPipelinesNames();
+
+        return new ResponseEntity<>(names, HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<Collection<IPipelineDescriptor>> getAllPipelines(@RequestBody DataWrapper<Void> data) throws Exception {
         IPipelinesRepository repository = PipelinesRepositoryFactory.create(data.repositoryLocation, data.repositoryConfig);
 
