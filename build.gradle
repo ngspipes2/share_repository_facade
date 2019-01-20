@@ -32,3 +32,13 @@ dependencies {
 
     compile project(":dsl_core")
 }
+
+jar {
+    manifest {
+        attributes "Main-Class": "pt.isel.ngspipes.share_repository_facade.App"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
