@@ -43,11 +43,3 @@ jar {
 
     baseName 'RepositoryFacade'
 }
-
-war {
-    manifest {
-        attributes "Main-Class": "pt.isel.ngspipes.share_repository_facade.App"
-    }
-
-    baseName 'RepositoryFacade'
-}
